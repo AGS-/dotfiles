@@ -45,7 +45,8 @@ set laststatus=2
 set showmode
 set showcmd
 
-" Install plugins using Plug
+" Install plugins using Plug.
+" If first time setting up, run :PlugInstall
 call plug#begin('~/.vim/plugged')
 Plug 'reewr/vim-monokai-phoenix'
 call plug#end()
