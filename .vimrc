@@ -1,6 +1,25 @@
 "Don't try to be vi compatible
 set nocompatible
 
+" Install plugins using Plug.
+" If first time setting up, run :PlugInstall
+call plug#begin('~/.vim/plugged')
+
+" Core
+Plug 'bling/vim-airline'
+
+" Languages
+Plug 'othree/html5.vim'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'pangloss/vim-javascript'
+Plug 'moll/vim-node'
+Plug 'mxw/vim-jsx'
+
+" Theme
+Plug 'reewr/vim-monokai-phoenix'
+
+call plug#end()
+
 " Helps force plugins to load correctly when it is turned back on below
 filetype off
 
@@ -44,12 +63,6 @@ set laststatus=2
 " Last line
 set showmode
 set showcmd
-
-" Install plugins using Plug.
-" If first time setting up, run :PlugInstall
-call plug#begin('~/.vim/plugged')
-Plug 'reewr/vim-monokai-phoenix'
-call plug#end()
 
 " Set colorscheme
 colorscheme monokai-phoenix
