@@ -7,6 +7,7 @@ call plug#begin('~/.vim/plugged')
 
 " Core
 Plug 'bling/vim-airline'
+Plug 'scrooloose/nerdtree'
 
 " Languages
 Plug 'othree/html5.vim'
@@ -38,7 +39,7 @@ set number
 " Show file stats
 set ruler
 
-" Blink cursor on error instead of beeping (grr)
+" Blink cursor on error instead of beeping
 set visualbell
 
 " Encoding
