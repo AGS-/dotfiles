@@ -74,3 +74,5 @@ set showcmd
 " Set colorscheme
 colorscheme monokai-phoenix
 
+" Start NERDTree
+autocmd vimenter * NERDTree
