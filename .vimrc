@@ -8,6 +8,7 @@ call plug#begin('~/.vim/plugged')
 " Core
 Plug 'bling/vim-airline'
 Plug 'scrooloose/nerdtree'
+Plug 'ryanoasis/vim-devicons'
 
 " Languages
 Plug 'othree/html5.vim'
@@ -42,6 +43,10 @@ set ruler
 " Blink cursor on error instead of beeping
 set visualbell
 
+" Necessary for devicon config
+set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types:h11
+let g:airline_powerline_fonts = 1
+
 " Encoding
 set encoding=utf-8
 
@@ -65,5 +70,7 @@ set laststatus=2
 set showmode
 set showcmd
 
+
 " Set colorscheme
 colorscheme monokai-phoenix
+
