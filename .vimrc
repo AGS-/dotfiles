@@ -74,5 +74,5 @@ set showcmd
 " Set colorscheme
 colorscheme monokai-phoenix
 
-" Start NERDTree
-autocmd vimenter * NERDTree
+" Toggle NERDTree with Ctrl N
+map <C-n> :NERDTreeToggle<CR>
