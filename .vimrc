@@ -20,7 +20,7 @@ Plug 'moll/vim-node'
 Plug 'mxw/vim-jsx'
 
 " Theme
-Plug 'reewr/vim-monokai-phoenix'
+Plug 'tomasr/molokai'
 
 call plug#end()
 
@@ -72,8 +72,8 @@ set laststatus=2
 set showmode
 set showcmd
 
-" Set colorscheme
-colorscheme monokai-phoenix
+"Colorscheme
+colorscheme molokai
 
 " Toggle NERDTree with Ctrl N
 map <C-n> :NERDTreeToggle<CR>
