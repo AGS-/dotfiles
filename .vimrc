@@ -9,6 +9,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'bling/vim-airline'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ryanoasis/vim-devicons'
 
 " Languages
@@ -76,6 +77,10 @@ colorscheme monokai-phoenix
 
 " Toggle NERDTree with Ctrl N
 map <C-n> :NERDTreeToggle<CR>
+
+" Toggle CtrlP
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
 
 " Syntastic
 set statusline+=%#warningmsg#
