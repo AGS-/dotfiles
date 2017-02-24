@@ -78,9 +78,10 @@ colorscheme molokai
 " Toggle NERDTree with Ctrl N
 map <C-n> :NERDTreeToggle<CR>
 
-" Toggle CtrlP
+" CtrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
 
 " Syntastic
 set statusline+=%#warningmsg#
