@@ -1,6 +1,13 @@
 "Don't try to be vi compatible
 set nocompatible
 
+" Install vim-plug if it isn't installed already
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
 " Install plugins using Plug.
 " If first time setting up, run :PlugInstall
 call plug#begin('~/.vim/plugged')
@@ -12,6 +19,10 @@ Plug 'scrooloose/syntastic'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'ryanoasis/vim-devicons'
+Plug 'tpope/vim-fugitive'
+Plug 'jlfwong/vim-mercenary'
+Plug 'mhinz/vim-signify'
+Plug 'scrooloose/nerdcommenter'
 
 " Languages
 Plug 'othree/html5.vim'
@@ -94,3 +105,16 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
+
+" Highlight Search
+set hlsearch
+
+" Don't autocomment next line
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+"Commenting
+let g:NERDSpaceDelims = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDDefaultAlign = 'left'
+let g:NERDCommentEmptyLines = 1
+let g:NERDTrimTrailingWhitespace = 1
