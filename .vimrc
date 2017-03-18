@@ -23,6 +23,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'jlfwong/vim-mercenary'
 Plug 'mhinz/vim-signify'
 Plug 'scrooloose/nerdcommenter'
+Plug 'flowtype/vim-flow'
 
 " Languages
 Plug 'othree/html5.vim'
