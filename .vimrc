@@ -18,7 +18,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'ryanoasis/vim-devicons'
 Plug 'tpope/vim-fugitive'
 Plug 'jlfwong/vim-mercenary'
 Plug 'mhinz/vim-signify'
@@ -33,7 +32,7 @@ Plug 'moll/vim-node'
 Plug 'mxw/vim-jsx'
 
 " Theme
-Plug 'tomasr/molokai'
+Plug 'AGS-/onedark.vim'
 
 call plug#end()
 
@@ -58,10 +57,6 @@ set ruler
 " Blink cursor on error instead of beeping
 set visualbell
 
-" Necessary for devicon config
-set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types:h11
-let g:airline_powerline_fonts = 1
-
 " Encoding
 set encoding=utf-8
 
@@ -85,11 +80,34 @@ set laststatus=2
 set showmode
 set showcmd
 
-"Colorscheme
-colorscheme molokai
+" Colorscheme
+colorscheme onedark
+
+" Italic Comments
+highlight Comment gui=italic
+highlight Comment cterm=italic 
+
+" Italic HTML Args
+highlight htmlArg gui=italic
+highlight htmlArg cterm=italic 
+
+" Types
+highlight Type gui=italic
+highlight Type cterm=italic
+
+" XML Args (For JSX)
+highlight xmlAttrib gui=italic
+highlight xmlAttrib cterm=italic
+
+"JS 'this'
+highlight jsthis gui=italic
+highlight jsthis cterm=italic
 
 " Toggle NERDTree with Ctrl N
 map <C-n> :NERDTreeToggle<CR>
+
+" Let NERDTree see dotfiles
+let NERDTreeShowHidden = 1
 
 " CtrlP
 let g:ctrlp_map = '<c-p>'
