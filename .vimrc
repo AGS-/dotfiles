@@ -80,6 +80,9 @@ set laststatus=2
 set showmode
 set showcmd
 
+" Shares system clipboard
+set clipboard=unnamed
+
 " Colorscheme
 colorscheme onedark
 
@@ -140,3 +143,6 @@ let g:NERDTrimTrailingWhitespace = 1
 
 " Make CtrlP 'listen' to .gitignore
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
+" Flow check will autoclose
+let g:flow#autoclose = 1;
