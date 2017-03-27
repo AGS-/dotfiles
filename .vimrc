@@ -22,7 +22,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'jlfwong/vim-mercenary'
 Plug 'mhinz/vim-signify'
 Plug 'scrooloose/nerdcommenter'
-Plug 'flowtype/vim-flow'
 
 " Languages
 Plug 'othree/html5.vim'
@@ -146,3 +145,9 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 
 " Flow check will autoclose
 let g:flow#autoclose = 1;
+
+" Disable easy mode
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
