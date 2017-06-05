@@ -4,7 +4,7 @@ set nocompatible
 " Install vim-plug if it isn't installed already
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
@@ -16,13 +16,15 @@ call plug#begin('~/.vim/plugged')
 Plug 'bling/vim-airline'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tpope/vim-fugitive'
 Plug 'jlfwong/vim-mercenary'
 Plug 'mhinz/vim-signify'
 Plug 'scrooloose/nerdcommenter'
-Plug 'flowtype/vim-flow'
+Plug 'wincent/command-t', {
+      \   'branch': 'next',
+      \   'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
+      \ }
 
 " Languages
 Plug 'othree/html5.vim'
@@ -79,9 +81,6 @@ set laststatus=2
 " Last line
 set showmode
 set showcmd
-
-" Shares system clipboard
-set clipboard=unnamed
 
 " Colorscheme
 colorscheme onedark
@@ -141,14 +140,24 @@ let g:NERDDefaultAlign = 'left'
 let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 
-" Make CtrlP 'listen' to .gitignore
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
-
-" Flow check will autoclose
-let g:flow#autoclose = 1
-
 " Disable easy mode
 noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
+
+" Command T
+let g:CommandTCancelMap=['<ESC>', '<C-c>']
+
+let g:CommandTEncoding='UTF-8'
+let g:CommandTFileScanner='watchman'
+let g:CommandTMaxCachedDirectories=10
+let g:CommandTMaxFiles=1500000
+let g:CommandTScanDotDirectories=1
+let g:CommandTTraverseSCM='pwd'
+let g:CommandTWildIgnore=&wildignore
+let g:CommandTWildIgnore.=',*/.git'
+let g:CommandTWildIgnore.=',*/.hg'
+let g:CommandTWildIgnore.=',*/bower_components'
+let g:CommandTWildIgnore.=',*/tmp'
+let g:CommandTWildIgnore.=',*/vendor'
