@@ -23,7 +23,6 @@ Plug 'jlfwong/vim-mercenary'
 Plug 'mhinz/vim-signify'
 Plug 'scrooloose/nerdcommenter'
 Plug 'wincent/command-t', {
-      \   'branch': 'next',
       \   'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
       \ }
 Plug 'wincent/ferret'
