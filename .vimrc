@@ -8,6 +8,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
+set termguicolors
 " Install plugins using Plug.
 " If first time setting up, run :PlugInstall
 call plug#begin('~/.vim/plugged')
@@ -25,6 +26,7 @@ Plug 'wincent/command-t', {
       \   'branch': 'next',
       \   'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
       \ }
+Plug 'wincent/ferret'
 
 " Languages
 Plug 'othree/html5.vim'
@@ -37,6 +39,9 @@ Plug 'mxw/vim-jsx'
 Plug 'AGS-/onedark.vim'
 
 call plug#end()
+
+" Make sure backspace works as expected
+set backspace=indent,eol,start
 
 " Helps force plugins to load correctly when it is turned back on below
 filetype off
@@ -125,7 +130,6 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_javascript_eslint_exe = '$(npm bin)/eslint'
 
 " Highlight Search
 set hlsearch
