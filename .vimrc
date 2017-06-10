@@ -26,6 +26,7 @@ Plug 'wincent/command-t', {
       \   'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
       \ }
 Plug 'wincent/ferret'
+Plug 'valloric/youcompleteme'
 
 " Languages
 Plug 'othree/html5.vim'
