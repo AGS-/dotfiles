@@ -165,7 +165,3 @@ let g:CommandTWildIgnore.=',*/.hg'
 let g:CommandTWildIgnore.=',*/bower_components'
 let g:CommandTWildIgnore.=',*/tmp'
 let g:CommandTWildIgnore.=',*/vendor'
-
-" Navigate YCM with Ctrl-J and Ctrl-K
-inoremap <expr> <c-j> ("\<C-n>")
-inoremap <expr> <c-k> ("\<C-p>")
