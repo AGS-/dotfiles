@@ -165,3 +165,6 @@ let g:CommandTWildIgnore.=',*/.hg'
 let g:CommandTWildIgnore.=',*/bower_components'
 let g:CommandTWildIgnore.=',*/tmp'
 let g:CommandTWildIgnore.=',*/vendor'
+
+" YouCompleteMe
+let g:ycm_autoclose_preview_window_after_completion = 1
