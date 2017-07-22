@@ -116,11 +116,6 @@ map <C-n> :NERDTreeToggle<CR>
 " Let NERDTree see dotfiles
 let NERDTreeShowHidden = 1
 
-" CtrlP
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 0
-
 " Syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
