@@ -34,6 +34,7 @@ Plug 'hail2u/vim-css3-syntax'
 Plug 'pangloss/vim-javascript'
 Plug 'moll/vim-node'
 Plug 'mxw/vim-jsx'
+Plug 'groenewege/vim-less'
 
 " Theme
 Plug 'AGS-/onedark.vim'
