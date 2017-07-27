@@ -1,0 +1,21 @@
+{
+    "editor.autoClosingBrackets": false, 
+    "editor.cursorStyle": "block",
+    "editor.fontSize": 12,
+    "editor.renderIndentGuides": false,
+    "files.eol": "\n",
+    "vim.autoindent": false,
+    "vim.disableAnnoyingNeovimMessage": true,
+    "vim.hlsearch": true,
+    "vim.ignorecase": false,
+    "vim.useSystemClipboard": true,
+    "vim.visualstar": true,
+    "workbench.colorCustomizations": {
+        "editor.background": "#000000",
+        "editor.lineHighlightBackground": "#000000",
+        "editorCursor.foreground": "#d0d0d0"
+    },
+    "workbench.colorTheme": "Egoist One",
+    "workbench.editor.showTabs": false,
+    "zenMode.hideStatusBar": false
+}
