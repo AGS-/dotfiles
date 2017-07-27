@@ -1,13 +1,13 @@
 module.exports = {
   config: {
     // default font size in pixels for all tabs
-    fontSize: 18,
+    fontSize: 12,
 
     // font family with optional fallbacks
     fontFamily: "PowerlineSymbols, Operator Mono",
 
     // terminal cursor background color and opacity (hex, rgb, hsl, hsv, hwb or cmyk)
-    cursorColor: "#528bff",
+    cursorColor: "#d0d0d1",
 
     // `BEAM` for |, `UNDERLINE` for _, `BLOCK` for █
     cursorShape: "BLOCK",
@@ -30,7 +30,7 @@ module.exports = {
     // set to `true` if you're using a Linux set up
     // that doesn't shows native menus
     // default: `false` on Linux, `true` on Windows (ignored on macOS)
-    showHamburgerMenu: false,
+    showHamburgerMenu: "",
 
     // set to `false` if you want to hide the minimize, maximize and close buttons
     // additionally, set to `'left'` if you want them on the left, like in Ubuntu
@@ -46,7 +46,7 @@ module.exports = {
     // Based on Atom One Dark syntax theme, hyper theme here:
     // https://github.com/mdo/hyperterm-atom-dark/blob/master/index.js
     colors: {
-      black: "#282c34",
+      black: "#000000",
       red: "#e06c75",
       green: "#98c379",
       yellow: "#d19a66",
@@ -68,6 +68,10 @@ module.exports = {
     // if left empty, your system's login shell will be used by default
     shell: "powershell.exe",
 
+    // for setting shell arguments (i.e. for using interactive shellArgs: ['-i'])
+    // by default ['--login'] will be used
+    shellArgs: [],
+
     // for environment variables
     env: {},
 
@@ -76,6 +80,9 @@ module.exports = {
 
     // if true, selected text will automatically be copied to the clipboard
     copyOnSelect: false
+
+    // URL to custom bell
+    // bellSoundURL: 'http://example.com/bell.mp3',
 
     // for advanced config flags please refer to https://hyper.is/#cfg
   },
