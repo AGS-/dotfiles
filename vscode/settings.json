@@ -4,6 +4,8 @@
     "editor.fontSize": 12,
     "editor.renderIndentGuides": false,
     "files.eol": "\n",
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.fontSize": 12,
     "vim.autoindent": false,
     "vim.disableAnnoyingNeovimMessage": true,
     "vim.hlsearch": true,
