@@ -4,9 +4,5 @@
         "key": "tab",
         "command": "selectNextSuggestion",
         "when": "editorTextFocus && suggestWidgetMultipleSuggestions && suggestWidgetVisible"
-    },
-    {
-        "key": "\\ t",
-        "command": "workbench.action.quickOpen"
     }
 ]
