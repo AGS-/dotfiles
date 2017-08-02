@@ -1,7 +1,7 @@
 {
     "editor.autoClosingBrackets": false, 
     "editor.cursorStyle": "block",
-    "editor.fontSize": 12,
+    "editor.fontSize": 11,
     "editor.minimap.enabled": false,
     "editor.renderIndentGuides": false,
     "editor.scrollBeyondLastLine": false,
@@ -9,7 +9,7 @@
     "files.eol": "\n",
     "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": false,
     "terminal.integrated.cursorBlinking": true,
-    "terminal.integrated.fontSize": 12,
+    "terminal.integrated.fontSize": 11,
     "vim.autoindent": false,
     "vim.disableAnnoyingNeovimMessage": true,
     "vim.hlsearch": true,
