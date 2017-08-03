@@ -2,16 +2,22 @@
 set nocompatible
 
 " Install vim-plug if it isn't installed already
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall | source $MYVIMRC
+if !has('win32')
+  if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+          \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall | source $MYVIMRC
+  endif
 endif
 
 set termguicolors
 " Install plugins using Plug.
 " If first time setting up, run :PlugInstall
-call plug#begin('~/.vim/plugged')
+if has('nvim')
+  call plug#begin('~/.config/nvim/plugged')
+else
+  call plug#begin('~/.vim/plugged')
+endif
 
 " Core
 Plug 'bling/vim-airline'
@@ -22,9 +28,14 @@ Plug 'tpope/vim-fugitive'
 Plug 'jlfwong/vim-mercenary'
 Plug 'mhinz/vim-signify'
 Plug 'scrooloose/nerdcommenter'
-Plug 'wincent/command-t', {
-      \   'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
-      \ }
+if !has('win32')
+  Plug 'wincent/command-t', {
+        \   'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
+        \ }
+else
+  " Switch back to command-t once we can compile in windows
+  Plug 'ctrlpvim/ctrlp.vim'
+endif
 Plug 'wincent/ferret'
 Plug 'valloric/youcompleteme'
 
@@ -164,3 +175,6 @@ let g:CommandTWildIgnore.=',*/vendor'
 
 " YouCompleteMe
 let g:ycm_autoclose_preview_window_after_completion = 1
+
+" Ctrl-P
+let g:ctrlp_custom_ignore = 'bower_components\|node_modules\|DS_Store\|git|tmp|vendor'
