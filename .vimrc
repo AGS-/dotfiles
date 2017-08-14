@@ -35,9 +35,13 @@ if !has('win32')
 else
   " Switch back to command-t once we can compile in windows
   Plug 'ctrlpvim/ctrlp.vim'
+  " Plug 'wincent/command-t'
 endif
 Plug 'wincent/ferret'
 Plug 'valloric/youcompleteme'
+Plug 'enricobacis/vim-airline-clock'
+" Track the engine.
+Plug 'SirVer/ultisnips'
 
 " Languages
 Plug 'othree/html5.vim'
@@ -175,6 +179,38 @@ let g:CommandTWildIgnore.=',*/vendor'
 
 " YouCompleteMe
 let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_seed_identifiers_with_syntax = 1
 
 " Ctrl-P
 let g:ctrlp_custom_ignore = 'bower_components\|node_modules\|DS_Store\|git|tmp|vendor'
+
+" UltiSnips
+" Copied from @wincent's .vimrc
+
+" YouCompleteMe and UltiSnips compatibility.
+let g:UltiSnipsExpandTrigger = '<C-j>'
+let g:UltiSnipsJumpForwardTrigger = '<C-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+
+" Prevent UltiSnips from removing our carefully-crafted mappings.
+let g:UltiSnipsMappingsToIgnore = ['autocomplete']
+
+" if has('autocmd')
+"   augroup WincentAutocomplete
+"     autocmd!
+"     autocmd! User UltiSnipsEnterFirstSnippet
+"     autocmd User UltiSnipsEnterFirstSnippet call autocomplete#setup_mappings()
+"     autocmd! User UltiSnipsExitLastSnippet
+"     autocmd User UltiSnipsExitLastSnippet call autocomplete#teardown_mappings()
+"   augroup END
+" endif
+
+" Additional UltiSnips config.
+if has('nvim')
+	let g:UltiSnipsSnippetsDir = '~/.config/nvim/ultisnips'
+else
+	let g:UltiSnipsSnippetsDir = '~/.vim/ultisnips'
+endif
+let g:UltiSnipsSnippetDirectories = ['ultisnips']
