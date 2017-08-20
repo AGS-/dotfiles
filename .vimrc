@@ -197,15 +197,15 @@ let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 " Prevent UltiSnips from removing our carefully-crafted mappings.
 let g:UltiSnipsMappingsToIgnore = ['autocomplete']
 
-" if has('autocmd')
-"   augroup WincentAutocomplete
-"     autocmd!
-"     autocmd! User UltiSnipsEnterFirstSnippet
-"     autocmd User UltiSnipsEnterFirstSnippet call autocomplete#setup_mappings()
-"     autocmd! User UltiSnipsExitLastSnippet
-"     autocmd User UltiSnipsExitLastSnippet call autocomplete#teardown_mappings()
-"   augroup END
-" endif
+if has('autocmd')
+  augroup WincentAutocomplete
+    autocmd!
+    autocmd! User UltiSnipsEnterFirstSnippet
+    autocmd User UltiSnipsEnterFirstSnippet call autocomplete#setup_mappings()
+    autocmd! User UltiSnipsExitLastSnippet
+    autocmd User UltiSnipsExitLastSnippet call autocomplete#teardown_mappings()
+  augroup END
+endif
 
 " Additional UltiSnips config.
 if has('nvim')
