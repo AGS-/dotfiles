@@ -15,9 +15,17 @@ set termguicolors
 " If first time setting up, run :PlugInstall
 if has('nvim')
   call plug#begin('~/.config/nvim/plugged')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
   call plug#begin('~/.vim/plugged')
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
 endif
+
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'lighttiger2505/deoplete-vim-lsp'
 
 " Core
 Plug 'bling/vim-airline'
@@ -38,7 +46,6 @@ else
   " Plug 'wincent/command-t'
 endif
 Plug 'wincent/ferret'
-Plug 'valloric/youcompleteme'
 Plug 'enricobacis/vim-airline-clock'
 " Track the engine.
 Plug 'SirVer/ultisnips'
@@ -177,11 +184,81 @@ let g:CommandTWildIgnore.=',*/bower_components'
 let g:CommandTWildIgnore.=',*/tmp'
 let g:CommandTWildIgnore.=',*/vendor'
 
-" YouCompleteMe
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_complete_in_comments = 1
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_seed_identifiers_with_syntax = 1
+" Deoplete 
+inoremap <expr> <TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources = {}
+let g:deoplete#sources._ = ['buffer', 'ultisnips']
+
+" LSP
+" npm install -g flow-bin
+if executable('flow')
+  augroup LspFlow
+    autocmd!
+    autocmd User lsp_setup call lsp#register_server({
+          \ 'name': 'flow',
+          \ 'cmd': {server_info->['flow', 'lsp']},
+          \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.flowconfig'))},
+          \ 'whitelist': ['javascript', 'javascript.jsx'],
+          \ })
+  augroup END
+endif
+" npm install -g typescript typescript-language-server
+if executable('typescript-language-server')
+  augroup LspTypescript
+    autocmd!
+    autocmd User lsp_setup call lsp#register_server({
+          \ 'name': 'typescript-language-server',
+          \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+          \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+          \ 'whitelist': ['typescript', 'typescript.tsx'],
+          \ })
+  augroup END
+endif
+" npm install -g vscode-css-languageserver-bin
+if executable('css-languageserver')
+  augroup LspCss
+    autocmd!
+    autocmd User lsp_setup call lsp#register_server({
+          \ 'name': 'css-languageserver',
+          \ 'cmd': {server_info->[&shell, &shellcmdflag, 'css-languageserver --stdio']},
+          \ 'whitelist': ['css', 'less', 'sass'],
+          \ })
+  augroup END
+endif
+" pip install python-language-server
+" if (executable('pyls'))
+"   let s:pyls_path = fnamemodify(g:python_host_prog, ':h') . '/'. 'pyls'
+"   augroup LspPython
+"     autocmd!
+"     autocmd User lsp_setup call lsp#register_server({
+"           \ 'name': 'pyls',
+"           \ 'cmd': {server_info->['pyls']},
+"           \ 'whitelist': ['python']
+"           \ })
+"   augroup END
+" endif
+" brew install llvm
+if executable('clangd')
+  augroup LspClangd
+    autocmd!
+    autocmd User lsp_setup call lsp#register_server({
+          \ 'name': 'clangd',
+          \ 'cmd': {server_info->['clangd']},
+          \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+          \ })
+  augroup END
+endif
+if executable('rls')
+  augroup LspRust
+    autocmd!
+    autocmd User lsp_setup call lsp#register_server({
+          \ 'name': 'rls',
+          \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
+          \ 'whitelist': ['rust'],
+          \ })
+  augroup END
+endif
 
 " Ctrl-P
 let g:ctrlp_custom_ignore = 'bower_components\|node_modules\|DS_Store\|git|tmp|vendor'
@@ -190,9 +267,19 @@ let g:ctrlp_custom_ignore = 'bower_components\|node_modules\|DS_Store\|git|tmp|v
 " Copied from @wincent's .vimrc
 
 " YouCompleteMe and UltiSnips compatibility.
-let g:UltiSnipsExpandTrigger = '<C-j>'
-let g:UltiSnipsJumpForwardTrigger = '<C-j>'
-let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<S-tab>"
+let g:UltiSnipsExpandTrigger="<nop>"
+let g:ulti_expand_or_jump_res = 0
+function! <SID>ExpandSnippetOrReturn()
+  let snippet = UltiSnips#ExpandSnippetOrJump()
+  if g:ulti_expand_or_jump_res > 0
+    return snippet
+  else
+    return "\<CR>"
+  endif
+endfunction
+inoremap <expr> <CR> pumvisible() ? "<C-R>=<SID>ExpandSnippetOrReturn()<CR>" : "\<CR>"
 
 " Prevent UltiSnips from removing our carefully-crafted mappings.
 let g:UltiSnipsMappingsToIgnore = ['autocomplete']
