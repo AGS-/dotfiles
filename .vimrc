@@ -1,5 +1,7 @@
 "Don't try to be vi compatible
 set nocompatible
+set termguicolors
+set hidden
 
 " Install vim-plug if it isn't installed already
 if !has('win32')
@@ -16,6 +18,11 @@ set termguicolors
 if has('nvim')
   call plug#begin('~/.config/nvim/plugged')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
 else
   call plug#begin('~/.vim/plugged')
   Plug 'Shougo/deoplete.nvim'
@@ -23,9 +30,7 @@ else
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'lighttiger2505/deoplete-vim-lsp'
+Plug 'junegunn/fzf'
 
 " Core
 Plug 'bling/vim-airline'
@@ -191,83 +196,29 @@ let g:deoplete#sources = {}
 let g:deoplete#sources._ = ['buffer', 'ultisnips']
 
 " LSP
-" npm install -g flow-bin
-if executable('flow')
-  augroup LspFlow
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'flow',
-          \ 'cmd': {server_info->['flow', 'lsp']},
-          \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.flowconfig'))},
-          \ 'whitelist': ['javascript', 'javascript.jsx'],
-          \ })
-  augroup END
-endif
-" npm install -g typescript typescript-language-server
-if executable('typescript-language-server')
-  augroup LspJavascript
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'javascript support using typescript-language-server',
-          \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-          \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'package.json'))},
-          \ 'whitelist': ['javascript', 'javascript.jsx'],
-          \ })
-  augroup END
-  augroup LspTypescript
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'typescript-language-server',
-          \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
-          \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
-          \ 'whitelist': ['typescript', 'typescript.tsx'],
-          \ })
-  augroup END
-endif
-" npm install -g vscode-css-languageserver-bin
-if executable('css-languageserver')
-  augroup LspCss
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'css-languageserver',
-          \ 'cmd': {server_info->[&shell, &shellcmdflag, 'css-languageserver --stdio']},
-          \ 'whitelist': ['css', 'less', 'sass'],
-          \ })
-  augroup END
-endif
-" pip install python-language-server
-" if (executable('pyls'))
-"   let s:pyls_path = fnamemodify(g:python_host_prog, ':h') . '/'. 'pyls'
-"   augroup LspPython
-"     autocmd!
-"     autocmd User lsp_setup call lsp#register_server({
-"           \ 'name': 'pyls',
-"           \ 'cmd': {server_info->['pyls']},
-"           \ 'whitelist': ['python']
-"           \ })
-"   augroup END
-" endif
-" brew install llvm
-if executable('clangd')
-  augroup LspClangd
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'clangd',
-          \ 'cmd': {server_info->['clangd']},
-          \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
-          \ })
-  augroup END
-endif
-if executable('rls')
-  augroup LspRust
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-          \ 'name': 'rls',
-          \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
-          \ 'whitelist': ['rust'],
-          \ })
-  augroup END
-endif
+" let g:LanguageClient_diagnosticsDisplay = {
+"       \   1: {'signTexthl': 'LineNr', 'virtualTexthl': 'User8'},
+"       \   2: {'signTexthl': 'LineNr', 'virtualTexthl': 'User8'},
+"       \   3: {'signTexthl': 'LineNr', 'virtualTexthl': 'User8'},
+"       \   4: {'signTexthl': 'LineNr', 'virtualTexthl': 'User8'},
+"       \ }
+
+let g:LanguageClient_rootMarkers = ['.flowconfig', 'package.json']
+
+let g:LanguageClient_serverCommands = {
+  \ 'javascript': [exepath('flow'), 'lsp'],
+  \ 'javascript.jsx': [exepath('flow'), 'lsp']
+  \ }
+
+let g:LanguageClient_loggingLevel = 'INFO'
+let g:LanguageClient_loggingFile =  expand('~/.local/share/nvim/LanguageClient.log')
+let g:LanguageClient_serverStderr = expand('~/.local/share/nvim/LanguageServer.log')
+
+" gd -- go to definition
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+
+" K -- lookup keyword
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 
 " Ctrl-P
 let g:ctrlp_custom_ignore = 'bower_components\|node_modules\|DS_Store\|git|tmp|vendor'
