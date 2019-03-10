@@ -22,7 +22,7 @@ if has('nvim')
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
-
+  Plug 'carlitux/deoplete-ternjs', { 'do': 'npm install -g tern' }
 else
   call plug#begin('~/.vim/plugged')
   Plug 'Shougo/deoplete.nvim'
@@ -33,9 +33,9 @@ endif
 Plug 'junegunn/fzf'
 
 " Core
+Plug 'w0rp/ale'
 Plug 'bling/vim-airline'
 Plug 'scrooloose/nerdtree'
-Plug 'scrooloose/syntastic'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'tpope/vim-fugitive'
 Plug 'jlfwong/vim-mercenary'
@@ -144,16 +144,6 @@ map <C-n> :NERDTreeToggle<CR>
 " Let NERDTree see dotfiles
 let NERDTreeShowHidden = 1
 
-" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['eslint']
-
 " Highlight Search
 set hlsearch
 
@@ -189,11 +179,25 @@ let g:CommandTWildIgnore.=',*/bower_components'
 let g:CommandTWildIgnore.=',*/tmp'
 let g:CommandTWildIgnore.=',*/vendor'
 
+" ALE
+" let g:ale_linters = {
+"   \ 'javascript': ['eslint', 'flow'],
+"   \ 'javascript.jsx': ['eslint', 'flow']
+"   \ }
+let g:ale_linters = {
+  \ 'javascript': ['eslint'],
+  \ 'javascript.jsx': ['eslint']
+  \ }
+let g:ale_linters_explicit = 1
+let g:ale_lint_on_text_changed = 'never'
+" nnoremap <silent> <Plug>(ale_detail) :ALEDetail<CR>
+" nmap s <Plug>(ale_detail)
+
 " Deoplete 
 inoremap <expr> <TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources = {}
-let g:deoplete#sources._ = ['buffer', 'ultisnips']
+" let g:deoplete#sources = {}
+" let g:deoplete#sources._ = ['buffer', 'ultisnips']
 
 " LSP
 " let g:LanguageClient_diagnosticsDisplay = {
