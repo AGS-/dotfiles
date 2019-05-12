@@ -62,14 +62,12 @@ Plug 'pangloss/vim-javascript'
 Plug 'moll/vim-node'
 Plug 'mxw/vim-jsx'
 Plug 'groenewege/vim-less'
+Plug 'plasticboy/vim-markdown'
 
 " Theme
 Plug 'AGS-/onedark.vim'
 
 call plug#end()
-
-" Deoplete workaround
-" call deoplete#custom#option('num_processes', 1)
 
 " Make sure backspace works as expected
 set backspace=indent,eol,start
@@ -209,7 +207,6 @@ let g:deoplete#enable_at_startup = 1
 "       \   3: {'signTexthl': 'LineNr', 'virtualTexthl': 'User8'},
 "       \   4: {'signTexthl': 'LineNr', 'virtualTexthl': 'User8'},
 "       \ }
-let g:LanguageClient_useVirtualText = 0
 
 let g:LanguageClient_rootMarkers = ['.flowconfig', 'package.json']
 
