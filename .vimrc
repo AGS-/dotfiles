@@ -208,11 +208,16 @@ let g:deoplete#enable_at_startup = 1
 "       \   4: {'signTexthl': 'LineNr', 'virtualTexthl': 'User8'},
 "       \ }
 
-let g:LanguageClient_rootMarkers = ['.flowconfig', 'package.json']
+let g:LanguageClient_rootMarkers = {
+  \ 'javascript': ['.flowconfig', 'package.json'],
+  \ 'javascript.jsx': ['.flowconfig', 'package.json'],
+  \ 'rust': ['Cargo.toml']
+  \ }
 
 let g:LanguageClient_serverCommands = {
   \ 'javascript': [exepath('flow'), 'lsp'],
-  \ 'javascript.jsx': [exepath('flow'), 'lsp']
+  \ 'javascript.jsx': [exepath('flow'), 'lsp'],
+  \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls']
   \ }
 
 let g:LanguageClient_loggingLevel = 'INFO'
