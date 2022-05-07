@@ -63,6 +63,9 @@ Plug 'moll/vim-node'
 Plug 'mxw/vim-jsx'
 Plug 'groenewege/vim-less'
 Plug 'plasticboy/vim-markdown'
+Plug 'dart-lang/dart-vim-plugin'
+Plug 'thosakwe/vim-flutter'
+Plug 'udalov/kotlin-vim'
 
 " Theme
 Plug 'AGS-/onedark.vim'
@@ -98,7 +101,7 @@ set encoding=utf-8
 
 " Whitespace
 set wrap
-set textwidth=79
+set textwidth=0
 set formatoptions=tcqrn1
 set tabstop=2
 set shiftwidth=2
@@ -187,7 +190,8 @@ let g:CommandTWildIgnore.=',*/vendor'
 "   \ }
 let g:ale_linters = {
   \ 'javascript': ['eslint'],
-  \ 'javascript.jsx': ['eslint']
+  \ 'javascript.jsx': ['eslint'],
+  \ 'cpp': ['clang']
   \ }
 let g:ale_linters_explicit = 1
 let g:ale_lint_on_text_changed = 'never'
@@ -208,16 +212,22 @@ let g:deoplete#enable_at_startup = 1
 "       \   4: {'signTexthl': 'LineNr', 'virtualTexthl': 'User8'},
 "       \ }
 
+autocmd BufReadPost *.kt setlocal filetype=kotlin
+
 let g:LanguageClient_rootMarkers = {
   \ 'javascript': ['.flowconfig', 'package.json'],
   \ 'javascript.jsx': ['.flowconfig', 'package.json'],
-  \ 'rust': ['Cargo.toml']
+  \ 'dart': ['pubsec.yaml']
   \ }
 
 let g:LanguageClient_serverCommands = {
-  \ 'javascript': [exepath('flow'), 'lsp'],
-  \ 'javascript.jsx': [exepath('flow'), 'lsp'],
-  \ 'rust': ['~/.cargo/bin/rustup', 'run', 'stable', 'rls']
+  \ 'javascript': [exepath('flow'), 'lsp', '--from', 'LanguageClient-neovim'],
+  \ 'javascript.jsx': [exepath('flow'), 'lsp', '--from', 'LanguageClient-neovim'],
+  \ 'dart': ['dart', $DART_SDK.'/bin/snapshots/analysis_server.dart.snapshot', '--lsp'],
+  \ 'typescript': ['typescript-language-server', '--stdio'],
+  \ 'typescript.tsx': ['typescript-language-server', '--stdio'],
+  \ 'typescriptinreact': ['typescript-language-server', '--stdio'],
+  \ 'kotlin': ["kotlin-language-server"]
   \ }
 
 let g:LanguageClient_loggingLevel = 'INFO'
