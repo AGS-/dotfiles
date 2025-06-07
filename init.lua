@@ -35,7 +35,6 @@ vim.opt.softtabstop = 2
 vim.opt.expandtab = true
 vim.opt.shiftround = false
 
-
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
@@ -53,6 +52,17 @@ require("lazy").setup({
     'scrooloose/nerdcommenter',
     'enricobacis/vim-airline-clock',
     {'nvim-lualine/lualine.nvim', dependencies = {'nvim-tree/nvim-web-devicons'}},
+    {
+      "greggh/claude-code.nvim",
+      dependencies = {
+        "nvim-lua/plenary.nvim", -- Already included above, but good to be explicit
+      },
+      config = function()
+        require("claude-code").setup({
+          -- Add any configuration options here if needed
+        })
+      end,
+    },
   },
 })
 
